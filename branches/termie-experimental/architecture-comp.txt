@@ -1,0 +1,81 @@
+
+
+JabberService
+    S2SComponent
+        S2S-Client-Component
+        S2S-Listen-Component
+
+    C2SComponent
+        C2S-Client-Component
+        C2S-Listen-Component
+        
+    Quick Router
+        - does this deal with my domain? if so, pass on to domain handler
+
+    Domain Router
+        - callbacks are registered here by the other components so that they
+          can claim to handle the data
+    
+    Session Manager
+        - start and end sessions, basically a router for stream IDs to entities
+    
+    User Manager
+        - authenticates vs a user/pass db?
+        - holds on to roster
+
+    PubSub
+        - entities pub/sub to things via this
+        - dispatches notifications
+
+
+Add Xpath Route:
+component -> router
+<iq type="set" id="$some_id" to="$router">
+    <route xmlns="http://term.ie/ns/xmpp/route">
+        <add>
+            <xpath>$some_xpath</xpath>
+            <priority>4</priority>
+        </add>
+    </route>
+</iq>
+
+response:
+<iq type="result" id="$some_id">
+    <route xmlns="http://term.ie/ns/xmpp/route">
+        <id>$new_route_id</id>
+    </route>
+</iq>
+
+
+Remove Xpath Route:
+-->
+<iq type="set" id="$some_id">
+    <route xmlns="http://term.ie/ns/xmpp/route">
+        <id>$new_route_id"</id>
+    </route>
+</iq>
+
+<-- 
+<iq type="result" id="$some_id" />
+
+
+Add Event Route:
+<iq type="set" id="$some_id" to="$router">
+    <route xmlns="http://term.ie/ns/xmpp/route">
+        <add>
+            <event>$some_event</event>
+            <priority>3</priority>
+        </add>
+    </route>
+</iq>
+
+<--
+<iq type="result" id="$some_id">
+    <route xmlns="http://term.ie/ns/xmpp/route">
+        <id>$new_route_id</id>
+    </route>
+</iq>
+
+Event Message:
+
+

@@ -1,0 +1,7 @@
+(^|.*/)\.svn
+.*\.py[co]
+(^|.*/)\..*\.swp
+.*\.egg-info
+\.workspace
+dist
+build

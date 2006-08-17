@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+
+<stream:stream xmlns:stream="http://etherx.jabber.org/streams" xmlns="jabber:client" to="term.ie" >
+
+<?xml version='1.0'?><stream:stream xmlns:stream='http://etherx.jabber.org/streams' id='44B3CD66' xmlns='jabber:client' from='term.ie'>
+
+<iq type="get" id="auth_1" to="term.ie" >
+<query xmlns="jabber:iq:auth">
+<username>jabber</username>
+</query>
+</iq>
+
+<iq type="result" id="auth_1" >
+<query xmlns="jabber:iq:auth">
+<username>jabber</username>
+<digest/>
+<password/>
+<resource/>
+</query>
+</iq>
+
+<iq type="set" id="auth_2" to="term.ie" >
+<query xmlns="jabber:iq:auth">
+<username>jabber</username>
+<digest>30ba945b74f8d1b22f1dca245f5f5797851c5aa1</digest>
+<resource>Psi</resource>
+</query>
+</iq>
+
+<iq type="result" id="auth_2" />
+
+<iq type="get" id="aab9a" >
+<query xmlns="jabber:iq:roster"/>
+</iq>
+
+<iq from="jabber@term.ie/Psi" type="result" id="aab9a" >
+
+<query xmlns="jabber:iq:roster">
+<item subscription="from" jid="termie@jabber.org" />
+<item subscription="to" jid="itkovian@jabber.org" >
+<group>.be</group>
+</item>
+<item subscription="both" jid="progrium@gmail.com" >
+<group>sf</group>
+</item>
+<item subscription="both" jid="halsted@gmail.com" >
+<group>sf</group>
+</item>
+<item subscription="both" jid="steven.wittens@gmail.com" >
+<group>.be</group>
+</item>
+<item ask="subscribe" subscription="none" jid="fserrier@gmail.com" >
+<group>.de</group>
+</item>
+<item subscription="both" jid="fserriere@gmail.com" >
+<group>.de</group>
+</item>
+<item subscription="both" jid="mateuszb@gmail.com" >
+<group>...</group>
+</item>
+<item subscription="both" jid="e-gandalf@jabber.org" >
+<group>...</group>
+</item>
+<item subscription="both" jid="elisa@jabber.ccc.de" >
+<group>.nl</group>
+</item>
+<item subscription="both" jid="elisa@jabber.xs4all.nl" >
+<group>.nl</group>
+</item>
+<item subscription="both" jid="gijskruitbosch@gmail.com" >
+<group>.nl</group>
+</item>
+<item subscription="both" jid="okke.formsma@gmail.com" >
+<group>.nl</group>
+</item>
+<item subscription="both" jid="ralphm@ik.nu" >
+<group>.nl</group>
+</item>
+</query>
+</iq>
+
+<presence>
+<priority>5</priority>
+</presence>
+
+<iq type="get" to="jabber@term.ie" id="aabba" >
+<vCard xmlns="vcard-temp" prodid="-//HandGen//NONSGML vGen v1.0//EN" version="2.0" />
+</iq>
+
+<iq from="jabber@term.ie/Psi" type="result" id="aabba" to="jabber@term.ie" >
+<vCard xmlns="vcard-temp" prodid="-//HandGen//NONSGML vGen v1.0//EN" version="2.0" />
+</iq>
+
+<presence from="jabber@term.ie/Adium" to="jabber@term.ie" >
+<show>away</show>
+<status>coffeez: grabbed</status>
+<x xmlns="jabber:x:delay" from="jabber@term.ie/Adium" stamp="20060711T16:00:35" />
+<x xmlns="jabber:x:delay" from="jabber@term.ie/Adium" stamp="20060711T16:00:35" />
+<x xmlns="jabber:x:delay" from="jabber@term.ie/Adium" stamp="20060711T16:09:41" />
+</presence>
+
+<presence from="progrium@gmail.com" type="unavailable" to="jabber@term.ie" />
+
+<presence from="halsted@gmail.com" type="unavailable" to="jabber@term.ie" />
+
+<presence from="elisa@jabber.xs4all.nl/Adium" to="jabber@term.ie" />
+
+<presence type="unavailable" >
+<status>Logged out</status>
+</presence>
+
+
