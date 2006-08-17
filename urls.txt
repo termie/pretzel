@@ -1,0 +1,6 @@
+http://www.ietf.org/rfc/rfc3920.txt
+http://www.ietf.org/rfc/rfc3921.txt
+
+http://www.xmpp.org/xmppimpl.html
+http://www.w3.org/TR/xpath#section-String-Functions
+http://www.jabber.org/jeps/jep-0162.html

@@ -1,0 +1,101 @@
+
+
+
+
+
+ComponentProxy
+    the goal is to function as a completely transparent proxy for a remote
+    connection
+
+    holds a protocol
+    implements a client factory interface?
+    holds on to component authentication info
+    
+
+
+
+class Component:
+    def addService(self, svc):
+        if IComponent.implementedBy(svc.__class__):
+            self.components[svc.name] = svc
+
+    def route(self, stanza, to=None, from_=None, id=None):
+        if self.components.has_key(to):
+            self.components[to].handle(stanza)
+        elif self.components.has_key['router']:
+            rs = RoutedStanza(stanza, to, from_, id)
+            self.components['router'].handle(rs)
+        else:
+            raise Exception("routing failed")
+
+    # api
+    def handle(self, stanza=None, event=None):
+        # try to do something
+        # usually dispatch, sometimes route
+
+class Router(Component):
+    NAMED_ROUTE = ...
+
+    def handle(self, stanza=None, event=None):
+        self.dispatch(stanza, event)
+
+    def onNamedRoute(self, stanza):
+        if not hasattr(stanza, 'to') or stanza.to == self.name:
+            self.dispatch(stanza.firstChild)
+        elif self.components.has_key(stanza.to):
+            self.components[stanza.to].handle(stanza)
+
+
+== router.py
+
+router = RouterComponent()
+router.name = "router"
+router.setServiceParent(application)
+
+
+# the component handler authenticates new components
+# and then generates ComponentProxy instances that it
+# then attaches to its parent. During authentication
+# it provides its name/host as that of its parent
+component_handler = IComponentAcceptor(router)
+component_handler.setServiceParent(router)
+
+# adapting the ComponentHandler to an IServerFactory
+# will create a factory that defers all behavior to
+# the ComponentHandler.
+component_listener = internet.TCPServer(5269,
+                                        IServerFactory(component_handler))
+component_listener.setServiceParent(component_handler)
+
+
+=== client2server.py
+
+client2server = ClientToServerComponent()
+client2server.name = "c2s"
+client2server.setServiceParent(application)
+
+component_handler = ComponentHandler()
+component_handler.setServiceParent(client2server)
+
+# adapting the ComponentHandler to an IClientFactory
+# will create factory that defers its behavior to
+# the ComponentHandler, once connected associating
+# a ComponentProxy instance with its parent.
+router_proxy_client = internet.TCPClient("localhost", 5269, 
+                                         IClientFactory(component_handler))
+
+router_proxy_client.setServiceParent(component)
+router_proxy_client.authenticator = SomeAuthCreds()
+router_proxy_client.thisHost = "c2s"
+
+# casting the client2server instance as an IServerFactory
+# creates a factory that attempts to pass all connections
+# directly through to a DomainComponent somewhere by
+# introspecting the "to" in the stream initiation
+client2server_listener = internet.TCPServer(5229, IServerFactory(client2server))
+client2server_listener.setServiceParent(client2server)
+
+===
+
+
+
